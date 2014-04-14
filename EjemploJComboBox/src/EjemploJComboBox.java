@@ -55,6 +55,9 @@ public class EjemploJComboBox extends JFrame {
 		//Como cambiar el nombre del equipo
 		System.out.println(elegido.getNombre());
 		elegido.setNombre("bcn2");
+		
+		//Eliminar 
+		comboBox.removeItemAt(0);
 
 	}
 
