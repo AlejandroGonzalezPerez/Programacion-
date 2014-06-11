@@ -21,6 +21,10 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField horaEntradaTxt;
 	private JTextField horaSalidaTxt;
 	private JTextField precioPagarTxt;
+	private Coche coche;
+	private DB datos;
+	
+	private JComboBox<DB> listadoCoches ;
 
 	/**
 	 * Launch the application.
@@ -50,7 +54,7 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox listadoCoches = new JComboBox();
+		final JComboBox listadoCoches = new JComboBox();
 		listadoCoches.setBounds(10, 29, 414, 20);
 		contentPane.add(listadoCoches);
 		
@@ -96,6 +100,42 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(precioPagarTxt);
 		
 		JButton btnNewButton = new JButton("A PAGAR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if((matriculaTxt.getText()).equals("")){
+					JOptionPane.showMessageDialog(null, "Has introducido mal el Nombre");
+				}
+				else if((horaEntradaTxt.getText().equals(""))){
+					JOptionPane.showMessageDialog(null, "Has introducido mal la Edad");
+				}
+				else if((horaSalidaTxt.getText()).equals("")){
+					JOptionPane.showMessageDialog(null, "Has introducido mal el Crimen");
+				}
+				
+				
+				coche.setMatriculacoche(matriculaTxt.getText());
+				coche.setHoraentrada(Integer.parseInt(horaEntradaTxt.getText()));
+				coche.setHorasalida(Integer.parseInt(horaSalidaTxt.getText()));
+				
+				
+			}
+		});
+		btnNewButton.setBounds(136, 272, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton botonBorrar = new JButton("Borrar");
+		botonBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Eliminamos el item seleccionado
+				listadoCoches.removeItem(coche);
+				
+			}
+		});
+		botonBorrar.setBounds(259, 272, 89, 23);
+		contentPane.add(botonBorrar);
+		
+		datos=new DB(listadoCoches);
+		datos.leerCoches(listadoCoches);
 		btnNewButton.setBounds(230, 58, 194, 128);
 		contentPane.add(btnNewButton);
 		
